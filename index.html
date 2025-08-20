@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKGS Quiz Portal - Final Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Tiro Bangla -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base styling with a vivid bluish animated gradient background */
+        body { 
+            font-family: 'Tiro Bangla', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe, #dbeafe, #bfdbfe, #e0f2fe);
+            background-size: 400% 400%;
+            color: #1e293b; /* Slate 800 */
+            overflow-x: hidden;
+            animation: gradient-animation 20s ease infinite;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        .bg-blobs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; opacity: 0.7; }
+        .blob1 { position: absolute; top: -15%; left: -15%; width: 450px; height: 450px; background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%); animation: move 20s infinite alternate; }
+        .blob2 { position: absolute; bottom: -20%; right: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(96, 165, 250, 0.35) 0%, rgba(96, 165, 250, 0) 70%); animation: move 25s infinite alternate-reverse; }
+        @keyframes move { from { transform: translate(0, 0) rotate(0deg) scale(1); } to { transform: translate(100px, 50px) rotate(180deg) scale(1.2); } }
+        
+        /* Dynamic scroll animation */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Preview images animation fix */
+        .reveal.visible .preview-left { opacity: 1; transform: translateX(-20%) rotateY(-15deg) scale(1); }
+        .reveal.visible .preview-right { opacity: 1; transform: translateX(20%) rotateY(15deg) scale(1); }
+        .preview-left, .preview-right { transition: all 1.2s cubic-bezier(0.25, 0.8, 0.25, 1); opacity: 0; transform-style: preserve-3d; }
+        .preview-left { transform: translateX(-60%) rotateY(-25deg) scale(0.95); }
+        .preview-right { transform: translateX(60%) rotateY(25deg) scale(0.95); }
+
+        /* Active navigation link style */
+        .active-nav-link { color: #0f172a; font-weight: 700; transform: scale(1.05); }
+        .nav-link { transition: all 0.3s ease-in-out; }
+
+        /* Back to Top button style */
+        #back-to-top { position: fixed; bottom: 20px; right: 20px; opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; pointer-events: none; }
+        #back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+        /* Typing effect */
+        .type-cursor { border-right: .15em solid #38bdf8; animation: blink-caret .75s step-end infinite; }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #38bdf8; } }
+    </style>
+</head>
+<body>
+    <div class="bg-blobs"><div class="blob1"></div><div class="blob2"></div></div>
+    
+    <header class="sticky top-0 z-50 p-4">
+        <nav class="container mx-auto px-6 py-3 glass-card rounded-xl flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="https://i.postimg.cc/MKBYdyJs/logo-English-removebg-preview-gif.png" alt="School Logo" class="h-9" onerror="this.style.display='none'">
+                <div class="flex flex-col">
+                    <span class="text-lg font-semibold text-slate-900 leading-tight">OKGS Quiz Portal</span>
+                    <span class="text-xs text-slate-500 leading-tight">Presentation</span>
+                </div>
+            </div>
+            <ul id="nav-links" class="hidden md:flex space-x-6 text-sm font-medium text-slate-700">
+                <li><a href="#part1" class="nav-link">Home</a></li>
+                <li><a href="#part-intro" class="nav-link">Introduction</a></li>
+                <li><a href="#part2" class="nav-link">Challenge & Solution</a></li>
+                <li><a href="#part3" class="nav-link">Preview</a></li>
+                <li><a href="#part4" class="nav-link">Features</a></li>
+                <li><a href="#part5" class="nav-link">The Gift</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="part1" class="min-h-screen flex flex-col justify-center items-center -mt-20 px-4 reveal">
+            <div class="container mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 type-effect leading-tight">
+                    Welcome to the introduction of
+                    <br>
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-indigo-600">
+                        OKGS Quiz Management System
+                    </span>
+                </h1>
+                <p class="text-xl md:text-2xl mt-4 text-slate-700 max-w-2xl mx-auto type-effect" data-delay="1200">
+                    শিক্ষণ-প্রক্রিয়াকে নতুনভাবে আবিষ্কার করুন, প্রযুক্তির আধুনিক ছোঁয়ায়।
+                </p>
+            </div>
+            <div class="absolute bottom-10 animate-bounce"><a href="#part-intro" aria-label="Scroll down"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-500"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></a></div>
+        </section>
+
+        <section id="part-intro" class="min-h-screen flex flex-col justify-center py-20 md:py-28 reveal">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16"><h2 class="text-4xl font-bold text-slate-900 type-effect">Introduction</h2></div>
+                <div class="glass-card rounded-2xl p-8 md:p-12 max-w-4xl mx-auto ring-1 ring-black/5">
+                    <div class="grid md:grid-cols-3 gap-8 items-center">
+                        <div class="md:col-span-1 flex justify-center">
+                            <div class="w-40 h-40 rounded-full bg-gradient-to-br from-blue-200 to-indigo-200 p-1 shadow-lg">
+                                <img src="https://i.postimg.cc/4d1Q39s5/Fahad-Bin-Mamun-2.jpg" alt="ফাহাদ বিন মামুন" class="w-full h-full rounded-full object-cover" onerror="this.src='https://placehold.co/160x160/e0f2fe/1e293b?text=FBM'">
+                            </div>
+                        </div>
+                        <div class="md:col-span-2 text-center md:text-left">
+                            <h3 class="text-3xl font-bold text-slate-900 type-effect">ফাহাদ বিন মামুন</h3>
+                            <p class="text-slate-400 italic mt-1 type-effect" data-delay="600">... an indie developer ...</p>
+                            <p class="text-slate-600 mt-2 type-effect" data-delay="800">স্নাতক (সম্মান) তৃতীয় বর্ষ</p>
+                            <hr class="my-4 border-t-slate-300">
+                            <p class="text-slate-700 leading-relaxed type-effect" data-delay="1000">আমি এই প্রতিষ্ঠানের একজন সহকারী শিক্ষক (আইসিটি) এবং 'Association of Little Programmers & Computer Geeks (ALPCG)' ক্লাবের প্রেসিডেন্ট হিসেবে দায়িত্ব পালন করছি। প্রযুক্তির মাধ্যমে শিক্ষাব্যবস্থাকে আরও সহজ ও আনন্দদায়ক করে তোলাই আমার মূল লক্ষ্য।</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="part2" class="min-h-screen flex flex-col justify-center py-20 md:py-28 reveal">
+            <div class="container mx-auto px-6"><div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4 flex items-center gap-3 type-effect"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>Our Common Challenge</h2>
+                    <p class="text-slate-700 leading-relaxed type-effect" data-delay="500">শিক্ষক হিসেবে আমাদের কাজের একটি বড় অংশ পাঠদানের বাইরেও বিস্তৃত। প্রশ্নপত্র তৈরি, খাতা মূল্যায়ন, ফলাফল বিশ্লেষণ এবং প্রশাসনিক কাজে প্রতিদিন আমাদের মূল্যবান ঘণ্টার পর ঘণ্টা ব্যয় হয়। এই পুনরাবৃত্তিমূলক কাজগুলো আমাদের মূল লক্ষ্য—শিক্ষার্থীদের সৃজনশীলভাবে গড়ে তোলা—থেকে মনোযোগ সরিয়ে দেয়।</p>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4 flex items-center gap-3 type-effect"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Our Smart Solution</h2>
+                    <p class="text-slate-700 leading-relaxed type-effect" data-delay="500">'OKGS Quiz Management System' এই সমস্ত চ্যালেঞ্জ মোকাবেলার জন্য একটি আধুনিক ও সমন্বিত সমাধান। এটি প্রশ্ন তৈরি থেকে শুরু করে উত্তরপত্র মূল্যায়ন এবং ফলাফল প্রকাশ পর্যন্ত পুরো প্রক্রিয়াটিকে স্বয়ংক্রিয় করে তোলে। এর মাধ্যমে শিক্ষকরা রুটিন কাজ থেকে মুক্তি পেয়ে পাঠদানে আরও বেশি সময় পাবেন।</p>
+                </div>
+            </div></div>
+        </section>
+
+        <section id="part3" class="min-h-screen flex flex-col justify-center py-20 md:py-28 reveal">
+            <div class="container mx-auto px-6 text-center">
+                <div class="text-center mb-16"><h2 class="text-4xl font-bold text-slate-900 type-effect">Software Preview</h2></div>
+                <div class="relative max-w-5xl mx-auto h-[550px]" style="perspective: 1500px;">
+                    <div class="absolute w-full md:w-3/4 h-auto top-0 left-0 preview-left hover:scale-105"><div class="glass-card rounded-2xl p-2 sm:p-4"><div class="flex items-center space-x-2 mb-2 p-2 border-b border-black/10"><span class="w-3 h-3 bg-red-500 rounded-full"></span><span class="w-3 h-3 bg-yellow-500 rounded-full"></span><span class="w-3 h-3 bg-green-500 rounded-full"></span></div><img src="https://i.postimg.cc/G2DjVdn0/Screenshot-20250820-234504-Chrome.jpg" class="rounded-b-lg" alt="Admin Panel" onerror="this.src='https://placehold.co/600x400/e0f2fe/1e293b?text=Admin+Panel'"></div></div>
+                    <div class="absolute w-full md:w-3/4 h-auto bottom-0 right-0 preview-right hover:scale-105"><div class="glass-card rounded-2xl p-2 sm:p-4"><div class="flex items-center space-x-2 mb-2 p-2 border-b border-black/10"><span class="w-3 h-3 bg-red-500 rounded-full"></span><span class="w-3 h-3 bg-yellow-500 rounded-full"></span><span class="w-3 h-3 bg-green-500 rounded-full"></span></div><img src="https://i.postimg.cc/TPF9thSq/Picsart-25-08-20-23-50-35-246.jpg" class="rounded-b-lg" alt="Student Panel" onerror="this.src='https://placehold.co/600x400/f0e6ff/1e293b?text=Student+Panel'"></div></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="part4" class="min-h-screen flex flex-col justify-center py-20 md:py-28 reveal">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16"><h2 class="text-4xl font-bold text-slate-900 type-effect">Key Features</h2></div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="glass-card p-6 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"><h3 class="font-bold text-lg mb-2 text-slate-900">⏱️ দৈনিক ২+ ঘণ্টা সাশ্রয়</h3><p class="text-slate-700">স্বয়ংক্রিয় প্রক্রিয়ায় শিক্ষকদের মূল্যবান সময় বাঁচবে, যা তারা পাঠদানে আরও ভালোভাবে ব্যয় করতে পারবেন।</p></div>
+                    <div class="glass-card p-6 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"><h3 class="font-bold text-lg mb-2 text-slate-900">📊 ৯০% নির্ভুল বিশ্লেষণ</h3><p class="text-slate-700">শিক্ষার্থীদের দুর্বলতার জায়গাগুলো স্বয়ংক্রিয়ভাবে ও নির্ভুলভাবে চিহ্নিত করা যাবে, যা ফলাফলের উন্নতি ঘটাবে।</p></div>
+                    <div class="glass-card p-6 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"><h3 class="font-bold text-lg mb-2 text-slate-900">📄 ১০০% কাগজবিহীন</h3><p class="text-slate-700">পরিবেশবান্ধব এবং খরচ সাশ্রয়ী একটি আধুনিক সমাধান, যা প্রতিষ্ঠানের বার্ষিক খরচ কমাবে।</p></div>
+                    <div class="glass-card p-6 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"><h3 class="font-bold text-lg mb-2 text-slate-900">💻 ২৪/৭ ব্যবহারযোগ্য</h3><p class="text-slate-700">শিক্ষার্থীরা তাদের সুবিধামতো যেকোনো সময়, যেকোনো স্থান থেকে স্মার্টফোন বা কম্পিউটারের মাধ্যমে পরীক্ষায় অংশ নিতে পারবে।</p></div>
+                    <div class="glass-card p-6 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"><h3 class="font-bold text-lg mb-2 text-slate-900">🤩 শিক্ষার্থীদের আগ্রহ বৃদ্ধি</h3><p class="text-slate-700">ডিজিটাল মাধ্যমে পরীক্ষা দিতে শিক্ষার্থীরা বেশি আগ্রহী হয়, যা তাদের উপস্থিতি এবং মনোযোগ প্রায় ৪০% পর্যন্ত বাড়াতে পারে।</p></div>
+                    <div class="glass-card p-6 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"><h3 class="font-bold text-lg mb-2 text-slate-900">🏆 ক্লাব কার্যক্রম সহজীকরণ</h3><p class="text-slate-700">স্কুলের বিভিন্ন ক্লাবের মাসিক কুইজ প্রতিযোগিতাগুলো এখন থেকে সহজেই এই পোর্টালের মাধ্যমে আয়োজন করা যাবে।</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="part5" class="min-h-screen flex flex-col justify-center py-20 md:py-28 reveal">
+            <div class="container mx-auto px-6 max-w-4xl text-center">
+                <div class="glass-card p-10 rounded-2xl">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4 type-effect">A Personal Announcement</h2>
+                    <p class="text-slate-700 leading-relaxed type-effect" data-delay="500">"এই প্রজেক্টটি কেবল একটি সফটওয়্যার নয়, এটি স্কুলের প্রতি আমার ভালোবাসা এবং কৃতজ্ঞতার একটি বহিঃপ্রকাশ। আমি অত্যন্ত আনন্দের সাথে জানাচ্ছি যে, আমি স্কুল থেকে যাওয়ার আগে এই সম্পূর্ণ 'OKGS Quiz Management System' আমাদের প্রাণপ্রিয় প্রতিষ্ঠানকে উপহার হিসেবে দিয়ে যেতে চাই।"</p>
+                </div>
+                <div class="mt-12"><h2 class="text-5xl font-extrabold text-slate-900 type-effect">ধন্যবাদ</h2></div>
+            </div>
+        </section>
+
+        <section id="part-final" class="min-h-[60vh] flex flex-col justify-center py-20 md:py-28 reveal">
+             <div class="container mx-auto px-6 max-w-4xl text-center">
+                <div class="bg-white/60 backdrop-blur-sm p-10 rounded-2xl shadow-2xl">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-2 type-effect">Experience It Yourself</h2>
+                    <p class="text-slate-700 leading-relaxed mb-8 type-effect" data-delay="500">পোর্টালটি ঘুরে আসুন এবং দেখুন কীভাবে এটি আমাদের শিক্ষাব্যবস্থায় একটি নতুন দিগন্ত উন্মোচন করতে পারে।</p>
+                    <a href="https://okgsquiz.vercel.app" target="_blank" class="inline-block bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-bold text-lg px-8 py-4 rounded-lg shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 group">Visit The Portal <span class="inline-block transition-transform duration-300 group-hover:translate-x-2 ml-2">→</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-white/50 backdrop-blur-sm pt-12 pb-8 text-center"><div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center md:text-left">
+                <h3 class="font-bold text-lg text-slate-800">OKGS Quiz Management System</h3>
+                <p class="text-slate-600 mt-2 text-sm">শিক্ষাকে আধুনিক প্রযুক্তির সাথে যুক্ত করার একটি উদ্যোগ।</p>
+            </div>
+            <div class="text-center">
+                <h3 class="font-bold text-lg text-slate-800">Connect</h3>
+                <div class="flex justify-center space-x-4 mt-2">
+                    <!-- Facebook Icon -->
+                    <a href="#" class="text-slate-600 hover:text-blue-600 transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+                    <!-- WhatsApp Icon -->
+                    <a href="#" class="text-slate-600 hover:text-green-500 transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.38 1.25 4.82l-1.34 4.91 5.04-1.32c1.4.74 3 .12 4.63.12h.01c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zM17.5 14.3c-.28-.14-1.65-.82-1.91-.91s-.45-.14-.64.14-.72.91-.88 1.1s-.32.19-.59.05c-.28-.14-1.18-.44-2.25-1.39s-1.75-2.17-1.95-2.54-.05-.59.14-.72c.13-.13.28-.32.42-.49.14-.14.19-.28.28-.47s.05-.37-.05-.51c-.1-.14-.64-1.54-.88-2.1s-.48-.48-.64-.48h-.5c-.19 0-.42.05-.64.28s-.86.82-.86 1.99c0 1.17.88 2.3 1 2.44s1.73 2.65 4.19 3.71c.59.26 1.05.42 1.41.53.59.19 1.13.14 1.54.09.48-.07 1.65-.68 1.88-1.34s.23-1.22.19-1.34c-.05-.12-.19-.19-.42-.32z" /></svg></a>
+                    <!-- YouTube Icon -->
+                    <a href="#" class="text-slate-600 hover:text-red-600 transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.78 22 12 22 12s0 3.22-.418 4.814a2.504 2.504 0 0 1-1.768 1.768C18.318 19 12 19 12 19s-6.318 0-7.812-.418a2.504 2.504 0 0 1-1.768-1.768C2 15.22 2 12 2 12s0-3.22.418-4.814a2.504 2.504 0 0 1 1.768-1.768C5.682 5 12 5 12 5s6.318 0 7.812.418ZM9.545 15.568V8.432L15.818 12 9.545 15.568z" clip-rule="evenodd" /></svg></a>
+                </div>
+            </div>
+            <div class="text-center md:text-right">
+                <h3 class="font-bold text-lg text-slate-800">Presented By</h3>
+                <p class="text-slate-600 mt-2 text-sm">Fahad Bin Mamun<br>Assistant Teacher (ICT), OKGS</p>
+            </div>
+        </div>
+        <hr class="border-t-slate-300 w-1/2 mx-auto my-6">
+        <p class="text-slate-600 text-sm">&copy; 2025 | OKGS Quiz Portal Presentation</p>
+    </div></footer>
+    
+    <a href="#part1" id="back-to-top" class="p-3 rounded-full bg-indigo-500 text-white shadow-lg hover:bg-indigo-600 focus:outline-none z-50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg></a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- TYPING ANIMATION ---
+            const startTyping = (element) => {
+                if (element.dataset.typed === 'true') return;
+                element.dataset.typed = 'true';
+                const text = element.textContent; element.textContent = ''; let i = 0;
+                const cursor = document.createElement('span'); cursor.className = 'type-cursor'; element.appendChild(cursor);
+                const typingInterval = setInterval(() => {
+                    if (i < text.length) { cursor.before(text.charAt(i)); i++; } 
+                    else { clearInterval(typingInterval); setTimeout(() => cursor.remove(), 700); }
+                }, 50);
+            };
+
+            // --- DYNAMIC SCROLL ANIMATION ---
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        const typeElements = entry.target.querySelectorAll('.type-effect');
+                        typeElements.forEach(el => {
+                            const delay = parseInt(el.dataset.delay || '0', 10);
+                            setTimeout(() => startTyping(el), delay);
+                        });
+                    } else {
+                        entry.target.classList.remove('visible');
+                        const typeElements = entry.target.querySelectorAll('.type-effect');
+                        typeElements.forEach(el => el.dataset.typed = 'false');
+                    }
+                });
+            }, { threshold: 0.25 });
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+            // --- ACTIVE NAVIGATION LINK ON SCROLL ---
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('#nav-links a');
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) { link.classList.add('active-nav-link'); }
+                        });
+                    }
+                });
+            }, { rootMargin: '-50% 0px -50% 0px' });
+            sections.forEach(section => navObserver.observe(section));
+
+            // --- BACK TO TOP BUTTON VISIBILITY ---
+            const backToTopButton = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) { backToTopButton.classList.add('show'); } 
+                else { backToTopButton.classList.remove('show'); }
+            });
+        });
+    </script>
+</body>
+                                                                                              </html>
